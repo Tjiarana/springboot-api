@@ -1,5 +1,6 @@
 package com.teerasak.crudapp.entitity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
@@ -19,6 +20,7 @@ public class Role {
     @Column(unique = true, nullable = false)
     private RoleName roleName;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "roles")
     private List<User> users = new ArrayList<>();
 }

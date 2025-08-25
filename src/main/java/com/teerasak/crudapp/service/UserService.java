@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -70,7 +71,7 @@ public class UserService implements UserDetailsService {
             Role role = roleRepository.findByRoleName(roleName)
                     .orElseThrow(() -> new IllegalArgumentException("Role not found"));
 
-            user.setRoles(List.of(role));
+            user.setRoles(new ArrayList<>(List.of(role)));
             return userRepository.save(user);
         } catch (Exception e) {
             throw new RuntimeException("Failed to register user : " + e.getMessage());
